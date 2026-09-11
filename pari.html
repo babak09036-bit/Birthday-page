@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تولد پرپری 🎂</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-image: url('back.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        /* هاله‌ی خیلی ملایم دور صفحه برای خوانایی بهتر متن‌ها */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.35) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* ---------- گربه‌های شناور ---------- */
+        .floating-item {
+            position: absolute;
+            bottom: -80px;
+            animation: floatUp 8s infinite linear;
+            z-index: 1;
+            object-fit: contain;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(255, 121, 198, 0.35));
+        }
+
+        @keyframes floatUp {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            85%  { opacity: 0.6; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ---------- کارت اصلی ---------- */
+        .card-container {
+            background-image: url('pony.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 30px 20px 18px;
+            width: 92%;
+            max-width: 850px;
+            height: 82vh;
+            max-height: 540px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: background-color 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
+            animation: cardEnter 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%),
+                                linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+            -webkit-mask-composite: destination-in;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%),
+                        linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+            mask-composite: intersect;
+        }
+
+        @keyframes cardEnter {
+            from { opacity: 0; transform: scale(0.92) translateY(30px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .card-container.white-mode {
+            background-image: none !important;
+            background-color: rgba(218, 207, 207, 0.95) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            -webkit-mask-image: none !important;
+            mask-image: none !important;
+        }
+
+        .content-box {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-height: calc(100% - 55px);
+            overflow-y: auto;
+            padding: 5px 10px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 121, 198, 0.6) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .content-box::-webkit-scrollbar { width: 4px; }
+        .content-box::-webkit-scrollbar-track { background: transparent; }
+        .content-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 121, 198, 0.6);
+            border-radius: 10px;
+        }
+
+        /* ---------- محتوای اسلایدها ---------- */
+        .slide-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ff79c6;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+            transition: color 0.4s ease;
+            animation: slideUp 0.45s ease both;
+        }
+
+        /* خط تزئینی کوچیک زیر تیتر */
+        .slide-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            margin: 10px auto 0;
+            border-radius: 3px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+
+        .slide-text {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #f8f8f2;
+            max-width: 640px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-align: justify;
+            text-align-last: center;
+            white-space: pre-line;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+            transition: color 0.4s ease;
+            animation: slideUp 0.45s ease 0.1s both;
+        }
+
+        .white-mode .slide-title {
+            color: #d81b60;
+            text-shadow: none;
+        }
+
+        .white-mode .slide-text {
+            color: #2c3e50;
+            text-shadow: none;
+        }
+
+        .slide-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #ff79c6;
+            box-shadow: 0 0 20px rgba(255, 121, 198, 0.4);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.6); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* ---------- بخش سوال ---------- */
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .question-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ff79c6;
+            text-shadow: 0 0 10px rgba(255, 121, 198, 0.4);
+            line-height: 1.6;
+            padding: 0 5px;
+            animation: slideUp 0.45s ease both;
+        }
+
+        .card-container:not(.white-mode) .question-title {
+            animation: slideUp 0.45s ease both, glowText 3s ease-in-out 0.6s infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 121, 198, 0.4); }
+            50%      { text-shadow: 0 0 24px rgba(255, 121, 198, 0.85); }
+        }
+
+        .white-mode .question-title {
+            color: #d81b60;
+            text-shadow: none;
+        }
+
+        .answers-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 16px;
+            touch-action: none;
+            animation: slideUp 0.45s ease 0.1s both;
+        }
+
+        .btn-yes {
+            background-color: #50fa7b;
+            color: #282a36;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+            transform-origin: center center;
+            z-index: 2;
+            animation: yesPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes yesPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(80, 250, 123, 0.4); }
+            50%      { box-shadow: 0 4px 28px rgba(80, 250, 123, 0.8); }
+        }
+
+        .btn-yes:hover { background-color: #63f98c; }
+
+        .btn-no {
+            background-color: #ff5555;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 85, 85, 0.4);
+            z-index: 5;
+            position: absolute;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+            touch-action: none;
+            animation: noWiggle 2.2s ease-in-out infinite;
+        }
+
+        @keyframes noWiggle {
+            0%, 100% { rotate: 0deg; }
+            25%      { rotate: 2.5deg; }
+            75%      { rotate: -2.5deg; }
+        }
+
+        /* ---------- پیام پایانی ---------- */
+        .final-heart {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            animation: heartbeat 1.4s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            20%      { transform: scale(1.18); }
+            40%      { transform: scale(0.96); }
+            60%      { transform: scale(1.12); }
+        }
+
+        .final-message {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #f1fa8c;
+            font-weight: bold;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            max-width: 480px;
+            animation: slideUp 0.5s ease 0.15s both;
+        }
+
+        .white-mode .final-message {
+            color: #2c3e50;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        /* ---------- کانفتی جشن ---------- */
+        .confetti {
+            position: fixed;
+            top: -50px;
+            z-index: 100;
+            pointer-events: none;
+            animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(115vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ---------- ناوبری ---------- */
+        .nav-area {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.35s ease;
+        }
+
+        .dot:hover { background: rgba(255, 255, 255, 0.55); }
+
+        .dot.active {
+            width: 26px;
+            background: #ff79c6;
+            box-shadow: 0 0 10px rgba(255, 121, 198, 0.7);
+        }
+
+        .white-mode .dot { background: rgba(0, 0, 0, 0.15); }
+        .white-mode .dot:hover { background: rgba(0, 0, 0, 0.3); }
+        .white-mode .dot.active { background: #d81b60; box-shadow: none; }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+
+        .white-mode .btn {
+            background: #ff79c6;
+            border: none;
+            color: white;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #ff79c6;
+            border-color: #ff79c6;
+            box-shadow: 0 0 15px rgba(255, 121, 198, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn:active:not(:disabled) { transform: translateY(0) scale(0.97); }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* ---------- دکمه موزیک و تم ---------- */
+        .music-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            z-index: 20;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 121, 198, 0.8);
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            background: rgba(255, 121, 198, 0.85);
+            animation: musicPulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 121, 198, 0.55); }
+            50%      { box-shadow: 0 0 0 12px rgba(255, 121, 198, 0); }
+        }
+
+        .theme-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            color: white;
+            z-index: 20;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 121, 198, 0.6);
+            border-color: rgba(255, 121, 198, 0.8);
+        }
+
+        .white-mode .theme-btn {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        /* ---------- موبایل ---------- */
+        @media screen and (max-width: 600px) {
+            body { padding: 10px; }
+
+            .card-container {
+                width: 100%;
+                height: 88dvh;
+                max-height: none;
+                padding: 60px 12px 12px;
+                border-radius: 18px;
+            }
+
+            .slide-title { font-size: 1.25rem; margin-bottom: 8px; }
+            .slide-title::after { margin-top: 7px; }
+            .slide-text { font-size: 0.9rem; line-height: 1.75; }
+            .question-title { font-size: 1.15rem; }
+            .answers-btns { height: 140px; }
+            .btn-yes, .btn-no { padding: 8px 18px; font-size: 0.9rem; }
+            .btn { padding: 9px 12px; font-size: 0.85rem; }
+
+            .music-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.75rem;
+            }
+
+            .theme-btn { font-size: 0.7rem; padding: 4px 10px; }
+            .dot { width: 8px; height: 8px; }
+            .dot.active { width: 22px; }
+            .final-message { font-size: 1rem; }
+        }
+
+        /* ---------- صفحه‌های کوتاه (لپ‌تاپ) ---------- */
+        @media screen and (max-height: 600px) {
+            .card-container {
+                height: 94dvh;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="music-btn" id="musicBtn" title="پخش موزیک">اینجا</button>
+    <button class="theme-btn" id="themeBtn" title="تغییر پس‌زمینه">سفید میکنه برات</button>
+
+    <div class="card-container" id="cardContainer">
+        <div class="content-box" id="contentBox"></div>
+
+        <div class="nav-area">
+            <div class="progress-dots" id="progressDots"></div>
+            <div class="controls">
+                <button class="btn" id="prevBtn">→ قبلی</button>
+                <button class="btn" id="nextBtn">بعدی ←</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="myAudio" src="ahng.mp3" preload="auto" loop></audio>
+
+    <script>
+        const slides = [
+            {
+                title: "",
+                text: "سلام سلام بزار اول توضیحات اینارو بدم بعد متنارو بخون خب اول اینکه دیدم تو تبریک گفتی زشته من نگم ( بهونه ) بعد دیگه اینکه همون‌طور که احتمالا تا الان دیدی سعی کردم عروسکاتو با دستای فلجم تو گوشی بکشم و واقعااااا تو گوشی با انگشتای تنومند و بزرگ من سخت بود 31 ( اینا کد هاییه که دستت میخورد به جای خنده و گریه می‌زدی و چون بلد نیستم تو لپ تاپ ایموجی توی متن بزارم قراره زیاد ببینیشون) و یه دکمه آهنگ هم سمت راست این صفحس که احتمالااااا قراره کار کنه بعد دیگه اینکه اکثر متنشو قبلا نوشته بودم و فعلاش رو نمیشه الان برم گذشته کنم خودت همون گذشته فرض کن و آره دیگه با اون دکمه های پایین صفحرو جلو عقب کن و اگه نور صفحه اذیتت می‌کنه و با لپ تاپ اومدی یدونه عکس خورشیده زیرش نوشته f11 اونو بزن",
+                image: ""
+            },
+            {
+                title: "اخرش بزن صفحه بعد ",
+                text: "سلاممممممممممم تولدت مبارککککککککککشکشحضک\nبالاخره 19 ساله شدی و امیدوارم امسال بالاخره از کنکور خلاص بشی و بتونی حداقل بری سمت چیزایی که دوست داری و از همه مهم تر امیدوارم بتونی چندتا دوست واقعا خوب پیدا کنی و باهاشون بهت خوش بگذره این یه سال دیگه ای که باهم گذشت جزو سخت ترین سال های زندگیم بود البته خب هرسال همینه 31 ولی بازم تو باعث شدی که برام قابل تحمل بشه و حتی خوش بگذره بهم نمی‌دونم چی راجبت انقدر خاصه که همیشه پیشت حالم خوبه و البته این مختص من نیست فقط و دیدم که بقیه هم چجوری باهات احساس نزدیکی میکنن و با همدیگه خوبید ( به جز وقتایی که یهو به سرشون میزنه و تصمیم میگیرن هرچی عقده تو زندگیشون داشتن یهو سر تو خالی کنن 31 ) شاید به خاطر اینه که خیلی خیلی خوشگلی یا شایدم بامزه و باحال بودنت یام یام هرکس تورو تو زندگیش داره خوشبخت ترین آدم جهانه و بینهایت خوشحالم که منم بینشونم با اینکه امسال زیاد حرف نزدیم و درس میخوندی و هفته ای یه بار می اومدی ولی کل هفته منتظر همون یه روز میموندم و کل کارای اون روزو عقب مینداختم چون حرف زدن با تو خیلی خیلی حال میده و بهترین دوستی هستی که تا حالا داشتم کاش تو یه شهر بودیم می‌تونستیم باهم بریم بیرون ولی در کل اره",
+                image: ""
+            },
+            {
+                title: "",
+                text: "وای پریا نمیدونی وقتی بالاخره کنکورت تموم شد و اومدی چقدرررررر خوشحال شدم و بهتر از اون اونجاش که گفتی عکس گرفته بودی برا من بفرستییییخشنشحشح امیدوارم هیچوقت راجب خودت احساس بدی نداشته باشی چون به معنای واقعی کلمه ناز ترین دختری هستی که تا الان دیدم و حقته که همه بهترین ورژنشون رو باهات باشن حس میکنم زیاد راجب خودمون حرف زدم و بیشتر باید راجب تو حرف بزنم از سال قبل تا الان خیلی تغییر کردی اخلاقات پخته تر شده به خاطر درامات دیگه عصبانیتت کمتر شده کامل تموم نشده ولی خب کمتر شده اره کم خونیتتتتت خداروشکر از اون دوره ای که بری دکتر و قرص بخوری گذشتی و امسال ندیدم حرفی ازشون بزنی هر سال هم که ماشالا داری ماه تر از ماه پیش میشی نمی‌دونم واقعا تا کجا میتونی خوشگلتر بشی ولی دوست دارم بتونم ببینم دیگه همینا دیگه اره امیدوارم امسال سال بهتری باشه برات و بتونی هرکاری دوست داری رو انجام بدی و هر روز شلیل بخوری \nاین دوتا استوری آخریت هم خیلی خیلی ناز بودن خوشگللللل\nبازم تولدت مبارکککککککککک\n1405/06/25",
+                image: ""
+            },
+            {
+                isQuestion: true
+            }
+        ];
+
+        let currentIndex = 0;
+        let yesScale = 1;
+        let isAnimating = false;
+        let lastNoTap = 0;
+
+        const contentBox = document.getElementById('contentBox');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function toFa(num) {
+            return String(num).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+        }
+
+        function renderSlide() {
+            const slide = slides[currentIndex];
+            let html = '';
+
+            if (slide.isQuestion) {
+                html = `
+                    <div class="question-container" id="questionBox">
+                        <h2 class="question-title">بعد از این همه مدت اصرار بالاخره قبول کردی خوشگل ترین دختر دنیایی یا نه (نه رو تست کن لطفا)</h2>
+                        <div class="answers-btns" id="answersArea">
+                            <button class="btn-yes" id="yesBtn" onclick="handleYesClick()">آره</button>
+                            <button class="btn-no" id="noBtn">نه</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                if (slide.image && slide.image.trim() !== "") {
+                    html += `<img src="${slide.image}" class="slide-img" alt="Birthday">`;
+                }
+                if (slide.title) {
+                    html += `<h2 class="slide-title">${slide.title}</h2>`;
+                }
+                if (slide.text) {
+                    html += `<p class="slide-text">${slide.text}</p>`;
+                }
+            }
+
+            contentBox.innerHTML = html;
+
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slides.length - 1;
+
+            if (slide.isQuestion) {
+                yesScale = 1;
+                setupNoButtonEvents();
+            }
+
+            renderDots();
+        }
+
+        function renderDots() {
+            const dotsEl = document.getElementById('progressDots');
+            dotsEl.innerHTML = slides.map((s, i) =>
+                `<button class="dot ${i === currentIndex ? 'active' : ''}" onclick="goToSlide(${i})" aria-label="اسلاید ${toFa(i + 1)}"></button>`
+            ).join('');
+        }
+
+        /* اسلاید با انیمیشن جهت‌دار: خروج به یه سمت، ورود از سمت دیگه */
+        function showSlide(newIndex, direction) {
+            if (isAnimating || newIndex < 0 || newIndex >= slides.length || newIndex === currentIndex) return;
+            isAnimating = true;
+
+            contentBox.style.opacity = '0';
+            contentBox.style.transform = `translateX(${direction > 0 ? -28 : 28}px)`;
+
+            setTimeout(() => {
+                currentIndex = newIndex;
+                renderSlide();
+                contentBox.scrollTop = 0;
+
+                contentBox.style.transition = 'none';
+                contentBox.style.transform = `translateX(${direction > 0 ? 28 : -28}px)`;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        contentBox.style.transition = '';
+                        contentBox.style.opacity = '1';
+                        contentBox.style.transform = 'translateX(0)';
+                        isAnimating = false;
+                    });
+                });
+            }, 230);
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentIndex + direction, direction);
+        }
+
+        function goToSlide(i) {
+            showSlide(i, i > currentIndex ? 1 : -1);
+        }
+
+        /* ---------- بازی دکمه نه ---------- */
+        function moveNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const answersArea = document.getElementById('answersArea');
+            if (!noBtn || !answersArea) return;
+
+            const areaRect = answersArea.getBoundingClientRect();
+            const btnWidth = noBtn.offsetWidth || 80;
+            const btnHeight = noBtn.offsetHeight || 40;
+
+            const maxOffsetX = (areaRect.width / 2) - (btnWidth / 2) - 10;
+            const maxOffsetY = (areaRect.height / 2) - (btnHeight / 2) - 10;
+
+            const randomX = (Math.random() * 2 - 1) * Math.max(0, maxOffsetX);
+            const randomY = (Math.random() * 2 - 1) * Math.max(0, maxOffsetY);
+
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function setupNoButtonEvents() {
+            const noBtn = document.getElementById('noBtn');
+            if (!noBtn) return;
+
+            noBtn.addEventListener('mouseenter', moveNoButton);
+
+            noBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                moveNoButton();
+                handleNoTap();
+            }, { passive: false });
+
+            noBtn.addEventListener('pointerdown', (e) => {
+                if (e.pointerType === 'touch') return; /* جلوگیری از دوبرابر شدن روی موبایل */
+                e.preventDefault();
+                moveNoButton();
+                handleNoTap();
+            });
+        }
+
+        function handleNoTap() {
+            const now = Date.now();
+            if (now - lastNoTap < 250) return; /* جلوگیری از تشدید ناخواسته */
+            lastNoTap = now;
+
+            if (yesScale < 2.4) yesScale += 0.25;
+            const yesBtn = document.getElementById('yesBtn');
+            if (yesBtn) {
+                yesBtn.style.transform = `scale(${yesScale})`;
+            }
+        }
+
+        /* ---------- جشن بعد از کلیک روی آره ---------- */
+        function celebrate() {
+            const emojis = ['💖', '✨', '🌟', '💫', '🎀', '🌸', '🎂'];
+            for (let i = 0; i < 45; i++) {
+                const p = document.createElement('div');
+                p.className = 'confetti';
+                p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.fontSize = (14 + Math.random() * 18) + 'px';
+                p.style.animationDuration = (2.2 + Math.random() * 2.8) + 's';
+                p.style.animationDelay = (Math.random() * 0.6) + 's';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 6500);
+            }
+        }
+
+        function handleYesClick() {
+            const noBtn = document.getElementById('noBtn');
+            if (noBtn) noBtn.remove();
+
+            celebrate();
+
+            const questionBox = document.getElementById('questionBox');
+            if (questionBox) {
+                questionBox.innerHTML = `
+                    <div class="final-heart">💖</div>
+                    <div class="final-message">
+                        بالاخره خودتو از چشمای من دیدیییییییییی بعد اینکه من اینو توی لپ تاپ یه کاری کرده بودم که موس رو میگرفتی روش تکون میخورد و فرار میکرد ولی خب تو گوشی فکر نکنم بششه و بازم فکر کنم یادم رفت بگم چقدر خوشگل و ماهی
+                    </div>
+                `;
+            }
+        }
+
+        /* ---------- گربه‌های شناور ---------- */
+        function createFloatingCats() {
+            const catImages = [
+                'https://cdn-icons-png.flaticon.com/512/1864/1864514.png'
+            ];
+
+            for (let i = 0; i < 14; i++) {
+                const img = document.createElement('img');
+                img.className = 'floating-item';
+                img.src = catImages[Math.floor(Math.random() * catImages.length)];
+                img.style.left = `${Math.random() * 92}vw`;
+                img.style.animationDuration = `${6 + Math.random() * 6}s`;
+                img.style.animationDelay = `${Math.random() * 5}s`;
+                /* عمق دادن به صحنه: بعضی گربه‌ها بزرگ‌تر و پررنگ‌تر، بعضی کوچیک‌تر و محو */
+                const depth = Math.random();
+                img.style.width = `${30 + depth * 35}px`;
+                img.style.opacity = String(0.45 + (1 - depth) * 0.4);
+                document.body.appendChild(img);
+            }
+        }
+
+        /* ---------- موزیک ---------- */
+        const audio = document.getElementById('myAudio');
+        const musicBtn = document.getElementById('musicBtn');
+
+        musicBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicBtn.innerText = '🎵';
+                }).catch(e => console.log(e));
+            } else {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+                musicBtn.innerText = 'اینجا';
+            }
+        });
+
+        /* ---------- تم ---------- */
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            document.getElementById('cardContainer').classList.toggle('white-mode');
+        });
+
+        /* ---------- دکمه‌ها ---------- */
+        prevBtn.addEventListener('click', () => changeSlide(-1));
+        nextBtn.addEventListener('click', () => changeSlide(1));
+
+        /* کیبورد: فلش چپ = بعدی، فلش راست = قبلی (چون راست‌چینه) */
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(1);
+            else if (e.key === 'ArrowRight') changeSlide(-1);
+        });
+
+        /* سوایپ روی موبایل */
+        let touchStartX = 0, touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            if (e.target.closest('button')) return;
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (e.target.closest('button')) return;
+            const dx = touchStartX - e.changedTouches[0].screenX;
+            const dy = touchStartY - e.changedTouches[0].screenY;
+            if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                changeSlide(dx > 0 ? 1 : -1);
+            }
+        }, { passive: true });
+
+        createFloatingCats();
+        renderSlide();
+    </script>
+</body>
+</html>
